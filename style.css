@@ -45,3 +45,12 @@ h1 {
     font-size: 1.2em;
     
 }
+#score {
+    border: 10px;
+    background-color: aqua;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-color: #1b1490;
+
+}

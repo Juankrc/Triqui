@@ -3,9 +3,19 @@ const cells = document.querySelectorAll('.cell');
 const resetButton = document.getElementById('resetButton');
 const statusText = document.getElementById('status');
 
-let currentPlayer = 'X';
+let player1 = prompt("Ingrese el nombre del Jugador 1 (usará 'X'):");
+let player2 = prompt("Ingrese el nombre del Jugador 2 (usará 'O'):");
+
+let currentPlayer = player1;
+let currentSymbol = 'X';
 let gameState = ['', '', '', '', '', '', '', '', ''];
 let isGameActive = true;
+let scorePlayer1 = 0;
+let scorePlayer2 = 0;
+
+const scoreDisplay = document.getElementById('score');
+scoreDisplay.textContent = `${player1}: ${scorePlayer1} | ${player2}: ${scorePlayer2}`;
+
 
 const winningConditions = [
     [0, 1, 2],
@@ -31,8 +41,8 @@ function handleCellClick(event) {
 }
 
 function updateCell(cell, index) {
-    gameState[index] = currentPlayer;
-    cell.textContent = currentPlayer;
+    gameState[index] = currentSymbol;
+    cell.textContent = currentSymbol;
 }
 
 function checkWinner() {
@@ -54,8 +64,17 @@ function checkWinner() {
     }
 
     if (roundWon) {
-        statusText.textContent = `Jugador ${currentPlayer} ha ganado!`;
-        window.alert("A Ganado" + currentPlayer );
+        statusText.textContent = `${currentPlayer} has ganado!`;
+        window.alert(`${currentPlayer} ha ganado`);
+       
+        if (currentPlayer === player1) {
+            scorePlayer1++;
+        } else {
+            scorePlayer2++;
+        }
+
+        scoreDisplay.textContent = `${player1}: ${scorePlayer1} | ${player2}: ${scorePlayer2}`;
+
         isGameActive = false;
         return;
     }
@@ -66,11 +85,13 @@ function checkWinner() {
         return;
     }
 
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+    currentSymbol = currentSymbol === 'X' ? 'O' : 'X';
 }
 
 function resetGame() {
-    currentPlayer = 'X';
+    currentPlayer = player1;
+    currentSymbol = 'X';
     gameState = ['', '', '', '', '', '', '', '', ''];
     isGameActive = true;
     statusText.textContent = '';
