@@ -55,6 +55,7 @@ function checkWinner() {
 
     if (roundWon) {
         statusText.textContent = `Jugador ${currentPlayer} ha ganado!`;
+        window.alert("A Ganado" + currentPlayer );
         isGameActive = false;
         return;
     }
